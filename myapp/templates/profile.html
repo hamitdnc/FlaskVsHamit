@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block body%} 
+		
+
+	<h2>Profil Sayfası</h2>
+	<u1>
+		{% if posts%}
+			{% for post in posts %}
+				<li>{{post.title}} | {{post.content}}</li>
+			{% endfor %}
+		{% else %}
+			<p>Post yok!</p>
+		{% endif %}
+	</u1>
+
+		
+	{% endblock%}
+
+
+		

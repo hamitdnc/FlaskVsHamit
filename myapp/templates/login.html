@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+
+{% block body %}
+	<form action="" method="POST">
+		{{ form.hidden_tag() }}
+		<table>
+			<tr>
+				<td>{{form.username.label}}</td>
+				<!-- username() method olarak çağırılırsa sana textbox gösterilir -->
+				<td>{{ form.username(size=20) }}</td> 
+			</tr>
+			<tr>
+				<td>{{ form.email.label }}</td>
+				<td>{{ form.email(size=20) }}</td> 
+			</tr>
+			<tr>
+				<td>{{form.password.label}}</td>
+				<td>{{form.password(size=20)}}</td> 
+			</tr>
+		</table>
+		<!-- SUBMIT BUTTONU -->
+		{{ form.submit() }}
+	</form>
+
+
+
+{% endblock %}
