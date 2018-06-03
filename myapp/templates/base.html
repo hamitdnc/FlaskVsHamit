@@ -1,16 +1,21 @@
-<html>
-<head>
-	<title>{{title}}</title>
-</head>
-<body>
-	<a href="/home">Home</a>
-	<a href="/profile">Profile</a>
-	<a href="/login">Login</a>
-	<hr />
+{% extends 'bootstrap/base.html' %}
+{% block title%}
+	{{tittle}}
+{% endblock%}
+
+{% include '_navbar.html' %}
+
+	{% with messages = get_flashed_messages() %} 
+	    {% if messages %}
+	    <ul>
+	        {% for message in messages %}
+	        <li>{{ message }}</li>
+	        {% endfor %}
+	    </ul>
+	    {% endif %} 
+	{% endwith %}
 
 	{% block body%} 
 		<!-- BURAYA DIGER TEMPLATELERDEKI BODY DATALARI GELECEK -->
 	{% endblock%}
 
-	</body>
-</html>

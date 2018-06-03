@@ -2,19 +2,16 @@
 {% import 'bootstrap/wtf.html' as wtf %}
 
 
-{% block body %}
-	
+{% block body%}
 	<div class="row">
 		<div class="col-md-4 col-md-offset-4">
-			<h1>Giriş Yap</h1>
-			{{wtf.quick_form(form)}}
+			<h1>Kaydol</h1>
+			{{ wtf.quick_form(form) }}
 			<br />
 			<p>
-				<a href="/register"> Üye değil misin? Kaydol !</a>
+				<a href="/login">Zaten üyeyim, giriş yap.</a>
 			</p>
 		</div>
 	</div>
-
-
 
 {% endblock %}

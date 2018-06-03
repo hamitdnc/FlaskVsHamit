@@ -2,11 +2,8 @@
 
 	{% block body%} 
 		
-	
-	<h1>Anasayfa'ya hojj geldiniz :D </h1>
-	<h3>Kullanıcı adı: {{bilgi.username}}</h3>
-	<h3>Parola: {{bilgi.password}}</h3>
-
+	<h1>Hoşgeldiniz: {{current_user.username}}</h1>
+	<h3>email: {{current_user.email}}</h3>
 
 
 	{% endblock%}

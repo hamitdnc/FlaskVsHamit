@@ -1,5 +1,13 @@
 import os
 
+
+# Projenin kök dizini
+basedir = os.path.abspath(os.path.dirname(__file__))
+
+
 class Config():
 
-	SECRET_KEY = os.environ.get('SECRET_KEY') or "Çok-gizli-anahtar"
+    SECRET_KEY = os.environ.get('SECRET_KEY') or "Çok-gizli-anahtar"
+    SQLALCHEMY_TRACK_MODIFICATIONS = False
+    SQLALCHEMY_DATABASE_URI = os.environ.get('DATABASE_URL') or \
+        'sqlite:///' + os.path.join(basedir, 'hamit.db')
