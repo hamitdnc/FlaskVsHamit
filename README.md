@@ -6,4 +6,3 @@
 - `flask db migrate -m "Mesajiniz" ` diyerek tablo olustur.
 - `flask db upgrade` diyerek models.py icindeki modelleri tabloya dönüştür.
 
-## Adnan Branc'i uzerinden yaziyorum
