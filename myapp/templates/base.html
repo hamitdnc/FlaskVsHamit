@@ -4,18 +4,22 @@
 {% endblock%}
 
 {% include '_navbar.html' %}
-
-	{% with messages = get_flashed_messages() %} 
-	    {% if messages %}
-	    <ul>
-	        {% for message in messages %}
-	        <li>{{ message }}</li>
-	        {% endfor %}
-	    </ul>
-	    {% endif %} 
-	{% endwith %}
-
-	{% block body%} 
+<!-- BOOTSTRAP CONTENT -->
+{% block content %}
+<div class="container">
+	<br />
+    {% with messages = get_flashed_messages() %} 
+        {% if messages %} 
+            {% for message in messages %}
+                <div class="alert alert-info" role="alert">
+                    {{message}}
+                </div>
+            {% endfor %}
+        {%endif%} 
+    {% endwith %}
+	<!-- Projeye ait content içerikleri buraya gelir. -->
+	{% block proje_content %} 
 		<!-- BURAYA DIGER TEMPLATELERDEKI BODY DATALARI GELECEK -->
 	{% endblock%}
-
+</div>
+{% endblock %}

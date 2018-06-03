@@ -30,6 +30,7 @@ def load_user(id):
     return User.query.get(id)
 
 
-class Tasks(db.Model):
-    __tablename__ = "tasks"
+# class Tasks(db.Model):
+#     """ Burayi hamit yapacak"""
+#     pass
     
