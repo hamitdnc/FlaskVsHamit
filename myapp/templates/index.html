@@ -1,12 +1,52 @@
-{% extends 'base.html' %}
+{% extends 'base.html' %} 
+{% import 'bootstrap/wtf.html' as wtf %} 
+{% block proje_content%}
 
-	{% block proje_content%} 
-		
-	<h1>Hoşgeldiniz: {{current_user.username}}</h1>
-	<h3>email: {{current_user.email}}</h3>
+<div class="row">
+	<div class="col-md-6">
+		<form action="" method="POST">
+			{{form.csrf_token()}}
+			<div class="list-group">
+				<div class="list-group-item">
+					{{wtf.form_field(form.name, form_type='inline', placeholder='Görev adı')}}
+				</div>
+				<div class="list-group-item">
+					{{wtf.form_field(form.description, form_type='inline', placeholder='Görev açıklaması')}}
+				</div>
+				<div class="list-group-item">
+					{{wtf.form_field(form.submit, form_type='inline', button_map={'submit':'success'} )}}
+				</div>
+			</div>
+		</form>
+	</div>
+	<div class="col-md-6">
+		<table class="table table-hover" border="1">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Görev Adı</th>
+					<th>Açıklaması</th>
+					<th>Yayın Tarihi</th>
+					<th>Rapor Eden</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% if tasks %}
+					{% for task in tasks %}
+					<tr>
+						<td>{{task.id}}</td>
+						<td>{{task.name}}</td>
+						<td>{{task.description}}</td>
+						<td>{{task.released_date}}</td>
+						<td>{{task.get_reported_name() }}</td>
+					</tr>
+					{% endfor %}
+				{% else %}
+				<p>Tanımlı görev yok...</p>
+				{% endif%}
+			</tbody>
+		</table>
+	</div>
+</div>
 
-
-	{% endblock%}
-
-
-	
+{% endblock%}

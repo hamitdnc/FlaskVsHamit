@@ -1,18 +1,32 @@
 # external
 from flask import render_template, flash, redirect, url_for
-from flask_login import login_required, current_user, login_user, logout_user
+from flask_login import login_required, login_user, logout_user
+# sisteme giris yapan kullaniciyi temsil eder.
+from flask_login import current_user
 # internal
 from myapp import app
-from myapp.forms import LoginForm, RegisterForm
-from myapp.models import User
+from myapp.forms import LoginForm, RegisterForm, TaskForm
+from myapp.models import User, Task
 from myapp import db
 
 
-@app.route('/')
-@app.route('/home')
+@app.route('/', methods=['GET', 'POST'])
+@app.route('/home', methods=['GET', 'POST'])
 @login_required
 def home():
-    return render_template('index.html', title="Anasayfa")
+    form = TaskForm()
+    # veritabanından select * from sorgusu gibi butun gorevleri aldik
+    tasks = Task.query.all()
+    if form.validate_on_submit():
+        name = form.name.data
+        description = form.description.data
+        task = Task(name=name, description=description)
+        # task'in user_id'sine mevcut kullanicinin id'sini atadik.
+        task.user_id = current_user.id
+        db.session.add(task)
+        db.session.commit()
+        return redirect(url_for('home'))
+    return render_template('index.html', title="Anasayfa", form=form, tasks=tasks)
 
 
 @app.route('/login', methods=['GET', 'POST'])
@@ -49,7 +63,8 @@ def register():
     form = RegisterForm()
     if form.validate_on_submit():
         user = User(username=form.username.data,
-                    email=form.email.data)
+                    email=form.email.data,
+                    is_admin=True)
 
         user.set_password(form.password.data)
         # veritabanına kayıt için session'a kullanıcıyı ekle
